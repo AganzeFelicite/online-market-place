@@ -39,6 +39,8 @@ public class AuthController {
             @Valid @RequestBody
             @Parameter(description = "Login request containing username and password")
             LoginRequest request) {
+
         return ResponseEntity.ok(userService.login(request));
     }
+
 }

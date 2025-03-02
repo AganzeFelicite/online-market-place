@@ -2,6 +2,7 @@ package com.online_marketplace_api.awesomity.common.orderDTO;
 
 import com.online_marketplace_api.awesomity.common.orderItemDTO.OrderItemResponse;
 import com.online_marketplace_api.awesomity.enums.OrderStatus;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Data
 @Builder
+@AllArgsConstructor
 public class OrderResponse {
     private Long id;
     private String orderNumber;

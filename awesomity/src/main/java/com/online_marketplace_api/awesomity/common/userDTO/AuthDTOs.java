@@ -34,6 +34,9 @@ public class AuthDTOs {
         private String address;
         private String phoneNumber;
         private String role;
+
+        public RegisterRequest(String john, String doe, String mail, String password123) {
+        }
     }
 
     @Data

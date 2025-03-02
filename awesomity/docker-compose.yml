@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  # API server service
+  api:
+    build: .
+    container_name: online_marketplace_api
+    ports:
+      - "8080:8080"   # Exposes port 8080 on the host machine
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/awesomity
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=pythonTest
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - JWT_SECRET=YOUR_BASE64_ENCODED_SECRET
+      - JWT_SECRET=your_actual_base64_encoded_secret
+      - SPRING_MAIL_USERNAME=aganzefelicite@gmail.com
+      - SPRING_MAIL_PASSWORD=zuugsnizdxunebhf
+      - SPRING_MAIL_HOST=smtp.gmail.com
+      - SPRING_MAIL_PORT=587
+      - SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH=true
+      - SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE=true
+    depends_on:
+      - db
+      - rabbitmq
+    networks:
+      - marketplace_network
+    volumes:
+      - ./product-images:/app/product-images
+
+
+  # PostgreSQL database service
+  db:
+    image: postgres:13
+    container_name: online_marketplace_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=pythonTest
+      - POSTGRES_DB=awesomity
+
+    volumes:
+      - marketplace_db_data:/var/lib/postgresql/data
+    networks:
+      - marketplace_network
+
+  # RabbitMQ service
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: online_marketplace_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"  # For management interface
+    networks:
+      - marketplace_network
+
+volumes:
+  marketplace_db_data:
+
+networks:
+  marketplace_network:
+    driver: bridge
