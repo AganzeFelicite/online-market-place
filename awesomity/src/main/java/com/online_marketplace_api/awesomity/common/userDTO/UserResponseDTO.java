@@ -23,6 +23,14 @@ public class UserResponseDTO {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    public UserResponseDTO(long l, String john, String doe, String mail) {
+        this.id = l;
+        this.firstName = john;
+        this.lastName = doe;
+        this.email = mail;
+
+    }
+
 
 //    public static UserResponseDTO fromEntity(User user) {
 //        return UserResponseDTO.builder()
